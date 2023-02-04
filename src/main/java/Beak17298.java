@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.Arrays;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
@@ -12,23 +11,19 @@ public class Beak17298 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         arr[0] = Integer.parseInt(st.nextToken());
         Stack<Integer> NGE = new Stack<>(); // index
-//        NGE.push(0);
+        NGE.push(0);
         for (int i = 1; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
-            if (arr[i-1] >= arr[i]) {
-                NGE.push(i);
-            }
-            else {
+            if (arr[i-1] < arr[i]){
                 while (!NGE.isEmpty() && arr[NGE.peek()] < arr[i]){
                     arr[NGE.pop()] = arr[i];
                 }
             }
+            NGE.push(i);
         }
         while (!NGE.isEmpty()){
             arr[NGE.pop()] = -1;
         }
-        //System.out.println(Arrays.toString(arr));
-        arr[N - 1] = -1;
         bw.write(Integer.toString(arr[0]));
         for (int i = 1; i < N; i++) {
             bw.write(" " + arr[i]);
