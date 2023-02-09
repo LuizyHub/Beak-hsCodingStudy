@@ -7,9 +7,13 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        Main.solution();
+    public static void main(String[] args){
+        System.out.println("\\    /\\");
+        System.out.println(" )  ( \')");
+        System.out.println("(  /  )");
+        System.out.println(" \\(__)|");
     }
+
 
     public static void solution() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
