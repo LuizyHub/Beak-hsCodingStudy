@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Beak2206_1 {
@@ -15,23 +14,28 @@ public class Beak2206_1 {
         st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-        int[][] map = new int[N][];
+        int[][] map = new int[N][M];
+        int[][] map2 = new int[N][M];
         for (int i = 0; i < N; i++) {
-            map[i] = br.readLine().chars().map(in -> in == '0' ? 0 : Integer.MAX_VALUE).toArray();
+            String s = br.readLine();
+            for (int j = 0; j < M; j++) {
+                int num = s.charAt(j) - '0';
+                if (num == 1)
+                    num = Integer.MAX_VALUE;
+                map[i][j] = num;
+                map2[i][j] = num;
+            }
         }
 
-        int[][] simulation = new int[N][];
-        for (int k = 0; k < N; k++) {
-            simulation[k] = Arrays.stream(map[k]).toArray();
-        }
-        simulation[0][0] = 1;
+
+        map[0][0] = 1;
 
         ArrayDeque<Integer> deque = new ArrayDeque<>();
         deque.addLast(0);
         while (!deque.isEmpty()){
             int cur = deque.pollFirst();
             if (cur == N*M-1){
-                ans = Math.min(ans, simulation[N-1][M-1]);
+                ans = Math.min(ans, map[N-1][M-1]);
             }
             int x = cur / M;
             int y = cur % M;
@@ -39,18 +43,15 @@ public class Beak2206_1 {
             for (int k = 0; k < 4; k++) {
                 int nextX = x + dx[k];
                 int nextY = y + dy[k];
-                if (0 <= nextX && nextX < N && 0 <= nextY && nextY < M && simulation[nextX][nextY] == 0){
-                    simulation[nextX][nextY] = simulation[x][y] + 1;
+                if (0 <= nextX && nextX < N && 0 <= nextY && nextY < M && map[nextX][nextY] == 0){
+                    map[nextX][nextY] = map[x][y] + 1;
                     deque.addLast(nextX*M + nextY);
                 }
             }
         }
 
-        for (int[] ints : simulation) {
-            System.out.println(Arrays.toString(Arrays.stream(ints).map(in -> in == Integer.MAX_VALUE ? 0 : in).toArray()));
-        }
 
-        simulation[N-1][M-1] = -1;
+        map2[N-1][M-1] = -1;
         deque = new ArrayDeque<>();
         deque.addLast(N*M-1);
         while (!deque.isEmpty()){
@@ -61,21 +62,37 @@ public class Beak2206_1 {
             for (int k = 0; k < 4; k++) {
                 int nextX = x + dx[k];
                 int nextY = y + dy[k];
-                if (0 <= nextX && nextX < N && 0 <= nextY && nextY < M && simulation[nextX][nextY] == 0){
-                    simulation[nextX][nextY] = simulation[x][y] - 1;
+                if (0 <= nextX && nextX < N && 0 <= nextY && nextY < M && map2[nextX][nextY] == 0){
+                    map2[nextX][nextY] = map2[x][y] - 1;
                     deque.addLast(nextX*M + nextY);
                 }
             }
         }
 
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                if (map[i][j] == Integer.MAX_VALUE){
+                    int positiveValue=Integer.MAX_VALUE;
+                    int negativeValue=Integer.MIN_VALUE;
 
-
-        for (int[] ints : simulation) {
-            System.out.println(Arrays.toString(Arrays.stream(ints).map(in -> in == Integer.MAX_VALUE ? 0 : in).toArray()));
+                    for (int k = 0; k < 4; k++) {
+                        int x = i + dx[k];
+                        int y = j + dy[k];
+                        if (0 <= x && x < N && 0 <= y && y < M ){
+                            if (map[x][y] > 0){
+                                positiveValue = Math.min(positiveValue, map[x][y]);
+                            }
+                            if (map2[x][y] < 0){
+                                negativeValue = Math.max(negativeValue, map2[x][y]);
+                            }
+                        }
+                    }
+                    if (positiveValue != Integer.MAX_VALUE && negativeValue != Integer.MIN_VALUE){
+                        ans = Math.min(ans, positiveValue - negativeValue + 1);
+                    }
+                }
+            }
         }
-
-
-
 
         if (ans == Integer.MAX_VALUE)
             System.out.println(-1);
