@@ -89,7 +89,8 @@ public class Beak16236_1 {
                     int nextX = curX + dx[i];
                     int nextY = curY + dy[i];
 
-                    if (0 <= nextX && nextX < N && 0 <= nextY && nextY < N && visited[nextX][nextY] ==0 && space[nextX][nextY] <= sharkSize){
+                    if (0 <= nextX && nextX < N && 0 <= nextY && nextY < N
+                            && visited[nextX][nextY] ==0 && space[nextX][nextY] <= sharkSize){
                         visited[nextX][nextY] = visited[curX][curY] + 1;
                         que.add(new Node(visited[nextX][nextY], nextX, nextY));
                     }
