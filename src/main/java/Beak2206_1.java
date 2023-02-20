@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Beak2206_1 {
@@ -92,6 +93,14 @@ public class Beak2206_1 {
                     }
                 }
             }
+        }
+
+        for (int[] ints : map) {
+            System.out.println(Arrays.toString(ints));
+        }
+        System.out.println();
+        for (int[] ints : map2) {
+            System.out.println(Arrays.toString(ints));
         }
 
         if (ans == Integer.MAX_VALUE)

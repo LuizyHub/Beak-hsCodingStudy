@@ -36,7 +36,6 @@ public class Beak2606 {
                 }
             }
         }
-
         System.out.println(count);
     }
 }

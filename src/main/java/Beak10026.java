@@ -33,7 +33,6 @@ public class Beak10026 {
                                 RGB[rgb][nextX][nextY] = false;
                                 que.addLast(nextX*N + nextY);
                             }
-
                         }
                     }
                 }
