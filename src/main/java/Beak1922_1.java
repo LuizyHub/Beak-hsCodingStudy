@@ -19,13 +19,12 @@ public class Beak1922_1 {
         }
     }
     private static ArrayList<Node>[] weights;
-    private static int[] distance;
     private static boolean[] visit;
     private static int V,E;
     private static int primPQ(int start){
         PriorityQueue<Node> pq = new PriorityQueue<>();
         int total = 0;
-        pq.add(new Node(start,0));
+        pq.offer(new Node(start,0));
         while (!pq.isEmpty()){
             Node node = pq.poll();
             if (visit[node.to])
@@ -46,9 +45,6 @@ public class Beak1922_1 {
         V = Integer.parseInt(br.readLine());
         E = Integer.parseInt(br.readLine());
 
-
-        distance = new int[V];
-        Arrays.fill(distance,Integer.MAX_VALUE);
         visit = new boolean[V];
         weights = new ArrayList[V];
 

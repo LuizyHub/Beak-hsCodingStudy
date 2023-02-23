@@ -46,12 +46,12 @@ public class Beak1922 {
                 if (!visit[node.to] && distance[node.to] > node.weight){
                     if (distance[node.to] == Integer.MAX_VALUE) { // never was in tree;
                         distance[node.to] = node.weight;
-                        treeSet.add(new Node(node.to, node.weight));
+                        treeSet.add(node);
                     }
                     else { // is in tree;
                         treeSet.remove(new Node(node.to, distance[node.to]));
                         distance[node.to] = node.weight;
-                        treeSet.add(new Node(node.to, node.weight));
+                        treeSet.add(node);
                     }
                 }
             }
