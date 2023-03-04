@@ -31,8 +31,6 @@ public class Beak17143 {
         }
     }
 
-
-
     private static void moveShark(){
         for (int i = 0; i < M; i++) {
             Shark shark = sharks[i];
@@ -111,6 +109,7 @@ public class Beak17143 {
         initMatrix();
         M = read();
         sharks = new Shark[M];
+
         for (int i = 0; i < M; i++) {
             int r = read()-1;
             int c = read()-1;
@@ -136,6 +135,7 @@ public class Beak17143 {
 
         System.out.println(sumShark);
     }
+
     private static int read() throws Exception {
 
         int c, N = System.in.read() - 48;
