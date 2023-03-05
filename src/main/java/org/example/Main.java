@@ -25,7 +25,11 @@ public class Main {
         return -(low+1);  // key not found.
     }
     public static void main(String[] args) {
-
+        String s = "add 3,5";
+        System.out.println(s.charAt(','));
+//        String ss = s.substring(3,s.charAt(':'));
+//        System.out.println(Integer.parseInt(s.substring(3,s.charAt(','))));
+        System.out.println(Integer.parseInt("123a"));
         int[] arr = {0,0,0,0,2,2,2,4,4,5,5,6,8,9,9};
         for (int i = -1; i < 10; i++) {
             System.out.println(i + ":" + binarySearch(arr,i));
