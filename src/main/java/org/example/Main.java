@@ -1,39 +1,64 @@
 package org.example;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+
 public class Main {
-    private static int binarySearch(int[] a, int key){
-        return binarySearch0(a,0,a.length,key);
-    }
-    private static int binarySearch0(int[] a, int fromIndex, int toIndex,
-                                     int key) {
-        int low = fromIndex;
-        int high = toIndex - 1;
+    static class Node {
+        int n;
+        int cnt;
 
-        while (low <= high) {
-            if (low == high && a[low] == key)
-                return low;
-            int mid = (low + high) >>> 1;
-            int midVal = a[mid];
+        public StringBuilder sb;
 
-            if (midVal < key)
-                low = mid + 1;
-            else if (midVal > key)
-                high = mid - 1;
-            else //midVal == key
-                high = mid;
+        public Node(int n, int cnt, StringBuilder sb) {
+            this.n = n;
+            this.cnt = cnt;
+            this.sb = sb;
         }
-        return -(low+1);  // key not found.
     }
-    public static void main(String[] args) {
-        String s = "add 3,5";
-        System.out.println(s.charAt(','));
-//        String ss = s.substring(3,s.charAt(':'));
-//        System.out.println(Integer.parseInt(s.substring(3,s.charAt(','))));
-        System.out.println(Integer.parseInt("123a"));
-        int[] arr = {0,0,0,0,2,2,2,4,4,5,5,6,8,9,9};
-        for (int i = -1; i < 10; i++) {
-            System.out.println(i + ":" + binarySearch(arr,i));
 
+
+    public static int n;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(br.readLine());
+
+        boolean[] check = new boolean[n + 1];
+        ArrayDeque<Node> dq = new ArrayDeque<>();
+        dq.add(new Node(n, 0, new StringBuilder(Integer.toString(n))));
+
+        while(!dq.isEmpty()) {
+            Node node = dq.pollFirst();
+
+            if (node.n == 1) {
+                System.out.print(node.cnt + "\n" + node.sb);
+                break;
+            }
+
+
+
+            int[] calc;
+            if (node.n % 2 == 0 && node.n % 3 == 0) {
+                calc = new int[]{node.n / 3, node.n / 2, node.n - 1};
+            } else if (node.n % 2 == 0) {
+                calc = new int[]{node.n / 2, node.n - 1};
+            } else if (node.n % 3 == 0) {
+                calc = new int[]{node.n / 3, node.n - 1};
+            } else {
+                calc = new int[]{node.n - 1};
+            }
+
+            for (int next: calc) {
+                if (next < 1) continue;
+                if (check[next]) continue;
+                check[next] = true;
+
+//                dq.addLast(new Node(next, node.cnt + 1));
+            }
         }
+
     }
 }
