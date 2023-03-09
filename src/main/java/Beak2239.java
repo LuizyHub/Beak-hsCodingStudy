@@ -21,6 +21,9 @@ public class Beak2239 {
             return dif;
         }
     }
+    private static void fill(){
+
+    }
 
     public static void main(String[] args) throws IOException {
         for (int i = 0; i < 9; i++) {
