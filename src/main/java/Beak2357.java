@@ -84,7 +84,7 @@ public class Beak2357 {
             updateTreeMax(i, num);
             updateTreeMin(i, num);
         }
-        while (M-- != 0){
+        while (M-- > 0){
             st = new StringTokenizer(br.readLine());
             int from = Integer.parseInt(st.nextToken());
             int end = Integer.parseInt(st.nextToken());
