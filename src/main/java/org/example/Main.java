@@ -2,6 +2,7 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println((int)'-');
         int i = 2143;
         System.out.println((int) Math.ceil(Math.log(i) / Math.log(2)));
         System.out.println(Integer.toBinaryString(i).length());
