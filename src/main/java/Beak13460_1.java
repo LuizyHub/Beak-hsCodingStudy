@@ -246,7 +246,6 @@ public class Beak13460_1 {
                     visit.add(next);
                 }
             }
-
         }
         System.out.println(min);
     }
